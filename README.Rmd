@@ -1,0 +1,125 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# gilmoRe
+
+A ggplot2 color palette based on Gilmore Girls characters. 
+
+![](https://cdn.mos.cms.futurecdn.net/GixLuSSC7dLrJnAMydCnBT-1200-80.jpg)
+
+The package includes palettes for some of the most popular Gilmore Girls characters. 
+
+## Installation
+
+You can install the CRAN version of gilmoRe with:
+
+``` r
+install.packages(c("gilmoRe"))
+```
+
+Alternatively, you can install the development version with: 
+
+``` r
+remotes::install_github("asmithflores/gilmoRe")
+```
+
+and load it with 
+
+```r
+library(gilmoRe)
+```
+
+## Examples
+
+```{r libraries, warning = FALSE, message=FALSE, echo=FALSE}
+library(tidyverse)
+library(palmerpenguins)
+library(gilmoRe)
+penguins <- palmerpenguins::penguins %>% 
+  tidyr::drop_na()
+```
+
+
+Color by discrete variable using default palette based on [Lorelai](https://static1.srcdn.com/wordpress/wp-content/uploads/2019/11/Lorelai-Gilmore-Outfit.jpg?q=50&fit=crop&w=963&h=481&dpr=1.5)
+
+```{r example-default}
+ggplot(penguins, aes(bill_depth_mm, bill_length_mm, color = species)) +
+  geom_point(size = 4) +
+  scale_color_gilmore()+
+  theme_minimal()
+```
+
+
+### Choose a different palette 
+
+[Rory](https://images.squarespace-cdn.com/content/v1/540cd7e4e4b0b83340ad9dd8/1479311788185-1OYUKGGZ3TV2K4BKZ6NL/pasted+image+0.png). 
+
+```{r example-palette}
+ggplot(penguins, aes(bill_depth_mm, bill_length_mm, color = species)) +
+  geom_point(size = 4) +
+  scale_color_gilmore(palette = "rory")+
+  theme_minimal()
+```
+
+
+### Color by numeric variable 
+
+Be content with a palette based on [Sookie](https://static.onecms.io/wp-content/uploads/sites/6/2015/10/gilmore-girls-melissa-mccarthy-01.jpg)
+
+```{r color-numeric}
+ggplot(penguins , aes(bill_depth_mm, bill_length_mm,color = bill_length_mm)) +
+  geom_point(size = 4) +
+  scale_color_gilmore(discrete = FALSE, palette ="sookie")+
+  theme_minimal()
+```
+
+### Fill by discrete variable
+
+Dark and broody, I mean, neutral with [Jess](https://epicpew.com/wp-content/uploads/2016/11/jess-mariano.jpg)
+```{r example-fill}
+ggplot(mpg, aes(manufacturer, fill = manufacturer)) +
+  geom_bar() +
+  theme_minimal()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_fill_gilmore(palette = "jess", guide = "none")
+```
+
+Or if you prefer the other one, [Logan](https://static.onecms.io/wp-content/uploads/sites/6/2016/02/gg520-0159.jpg)
+
+```{r example-fill2}
+ggplot(penguins, aes(species, fill = species)) +
+  geom_bar() +
+  theme_minimal()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_fill_gilmore(palette = "logan", guide = "none")
+```
+
+## Palettes 
+
+`lorelai` = "#B0568B", "#4D505A", "#AA6F6C", "#763C39", "#1C0504"
+`rory` = "#353573", "#5478BF", "#D7E7FF", "#FF9D92", "#46201D"
+`sookie` = "#FFBFA5", "#F87B75", "#E75782", "#640A02", "#2338AF"
+`emily` = "#DAB6C4", "#DBAA70", "#CB9B8D", "#984849", "#0E0508"
+`lane` = "#E0F0F6", "#F2B9B6", "#FCE1BB", "#2A5972", "#2F3D43"
+`luke` = "#A39998", "#182454", "#32341D", "#22222A", "#13140C"
+`dean` = "#0D070A", "#C48667", "#154018", "#0D260C", "#8C5642"
+`jess` = "#261D1F", "#594F54", "#110914", "#B6B6B6", "#B1714B"
+`logan` = "#DADAF2", "#C5937C", "#D4987E", "#121617", "#674225"
+`kirk` = "#72211D", "#2F2724", "#F2C3A7", "#D99E89", "#AA8654"
+
+## Related Packages 
+
+Very thankful for the package and inspiration from [Alex Stephenson](https://github.com/asteves) called [tayloRswift](https://github.com/asteves/tayloRswift). 
+
