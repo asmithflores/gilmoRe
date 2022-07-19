@@ -1,0 +1,57 @@
+---
+title: "Introduction"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## What this Package Does 
+
+gilmoRe is a little package to add color palettes to ggplot made graphics inspired by Gilmore Girls characters. 
+
+```{r setup}
+#library(gilmoRe)
+library(ggplot2)
+```
+
+There are two functions in the package. 
+
+### scale_color_gilmore()
+
+For color adjustments, use scale_color_gilmore()
+
+```{r}
+
+data <- data.frame(c = LETTERS[1:3],
+                   x = c(1,5,7),
+                   y = c(5,9,13))
+ggplot(data, aes(x =x, y = y, color = c)) +
+  geom_point(size = 4) +
+  scale_color_gilmore(palette = "lorelai")+
+  theme_minimal()
+
+```
+
+### scale_fill_gilmore()
+
+For fill, use scale_fill_gilmore()
+
+```{r}
+ggplot(data, aes(x=x, fill = c))+
+  geom_bar()+
+  theme_minimal()+
+  scale_fill_gilmore(palette = "rory")
+
+```
+
+
+
